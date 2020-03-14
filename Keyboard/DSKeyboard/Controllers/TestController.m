@@ -8,7 +8,7 @@
 
 #import "TestController.h"
 #import "ELKyeboard.h"
-
+#include <objc/runtime.h>
 #define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
 // home indicator
 
@@ -27,6 +27,7 @@
     if (!_tf0) {
         _tf0 = [[UITextField alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(self.navigationController.navigationBar.frame) + 100, kScreenWidth - 2 * 20, 30)];
         _tf0.delegate = self;
+        [_tf0 addObserver:self forKeyPath:@"delegate" options:NSKeyValueObservingOptionNew context:nil];
         _tf0.borderStyle = UITextBorderStyleRoundedRect;
         _tf0.backgroundColor = [UIColor whiteColor];
         _tf0.placeholder = @"请输入账号";
